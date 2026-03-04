@@ -12,6 +12,8 @@ export type Theme = typeof theme;
 
 export type IFont = keyof typeof typography.fonts;
 
+export type IFontSize = number;
+
 export type IColor = keyof typeof palette;
 
 export { colors, spacing, typography };

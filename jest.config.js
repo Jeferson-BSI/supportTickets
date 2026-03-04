@@ -10,6 +10,7 @@ module.exports = {
     '^@core/(.*)$': '<rootDir>/src/core/$1',
     '^@features/(.*)$': '<rootDir>/src/features/$1',
     '^@tests/(.*)$': '<rootDir>/src/tests/$1',
+    '^@theme/(.*)$': '<rootDir>/src/core/theme/$1',
   },
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',
