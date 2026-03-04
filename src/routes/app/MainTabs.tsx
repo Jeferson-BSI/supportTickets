@@ -2,12 +2,15 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { View, StyleSheet } from 'react-native';
+import SignInScreen from '@features/auth/SignIn/screens/SignIn.view';
+import { colors } from '@theme/colors';
 
 const Tab = createBottomTabNavigator();
 
 export function MainTabs() {
   return (
     <Tab.Navigator
+      sceneContainerStyle={{ backgroundColor: colors.background.primary }}
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: '#4361EE',
@@ -26,8 +29,8 @@ export function MainTabs() {
         },
       }}
     >
-      <Tab.Screen name="Dashboard" component={() => <View></View>} />
-      <Tab.Screen name="Tickets" component={() => <View></View>} />
+      <Tab.Screen name="Dashboard" component={SignInScreen} />
+      <Tab.Screen name="Tickets" component={SignInScreen} />
     </Tab.Navigator>
   );
 }

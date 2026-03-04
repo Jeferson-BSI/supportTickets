@@ -32,24 +32,30 @@ const Button = ({
 }: ButtonProps) => {
   const resolvedLoadingColor = loadingColor ?? (variant === 'secondary' ? 'primary' : 'white');
 
-  const resolveStyle = (state: Native.PressableStateCallbackType) => {
+  const resolveStyle = (
+    state: Native.PressableStateCallbackType,
+  ): Native.StyleProp<Native.ViewStyle> => {
     const customStyle = typeof style === 'function' ? style(state) : style;
     return [
       styles.base,
       styles[variant],
-      bg ? { backgroundColor: theme.colors[bg] } : null,
-      borderColor ? { borderColor: theme.colors[borderColor] } : null,
+      bg ? { backgroundColor: theme.colors[bg] as string } : null,
+      borderColor ? { borderColor: theme.colors[borderColor] as string } : null,
       typeof borderWidth === 'number' ? { borderWidth } : null,
       width ? { width } : null,
       height ? { height } : null,
+      state.pressed && { opacity: 0.7 },
       customStyle,
     ];
   };
 
   return (
-    <Native.Pressable {...rest} style={resolveStyle}>
+    <Native.Pressable {...rest} style={resolveStyle} >
       {loading ? (
-        <Native.ActivityIndicator size={spinnerSize} color={theme.colors[resolvedLoadingColor]} />
+        <Native.ActivityIndicator
+          size={spinnerSize}
+          color={theme.colors[resolvedLoadingColor] as string}
+        />
       ) : (
         children
       )}
@@ -70,10 +76,9 @@ const styles = Native.StyleSheet.create({
   },
   secondary: {
     backgroundColor: theme.colors.background.primary,
-    borderColor: theme.colors.borders.default,
+    borderColor: theme.colors.border,
     borderWidth: 1,
   },
-
 });
 
 export default Button;

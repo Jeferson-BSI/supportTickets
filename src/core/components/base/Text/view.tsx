@@ -17,17 +17,21 @@ const Text = ({
   color = 'textPrimary',
   align = 'auto',
   maxWidth,
+  style,
   ...rest
 }: ITextProps) => (
   <Native.Text
     {...rest}
-    style={{
-      fontFamily: theme.typography.fonts[font],
-      color: theme.colors[color],
-      fontSize: 16,
-      textAlign: align,
-      maxWidth,
-    }}
+    style={[
+      {
+        fontFamily: theme.typography.fonts[font],
+        color: theme.colors[color] as string,
+        fontSize: size,
+        textAlign: align,
+        maxWidth,
+      },
+      style,
+    ]}
   >
     {children}
   </Native.Text>

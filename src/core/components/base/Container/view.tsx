@@ -22,6 +22,9 @@ interface ContainerProps extends Native.ViewProps {
   ml?: SpacingKey;
 
   width?: Native.DimensionValue;
+  elevation?: Native.ViewStyle['elevation'];
+  borderRadius?: Native.ViewStyle['borderRadius'];
+  gap?: Native.ViewStyle['gap'];
   height?: Native.DimensionValue;
   minWidth?: Native.DimensionValue;
   minHeight?: Native.DimensionValue;
@@ -30,8 +33,9 @@ interface ContainerProps extends Native.ViewProps {
   flex?: Native.ViewStyle['flex'];
   align?: Native.ViewStyle['alignItems'];
   justify?: Native.ViewStyle['justifyContent'];
-  direction?: Native.ViewStyle['flexDirection'];
+  flexDirection?: Native.ViewStyle['flexDirection'];
   wrap?: Native.ViewStyle['flexWrap'];
+  center?: boolean;
 }
 
 const Container = ({
@@ -59,32 +63,39 @@ const Container = ({
   maxWidth,
   maxHeight,
   flex,
+  borderRadius,
   align,
   justify,
-  direction,
+  flexDirection,
   wrap,
+  gap,
+  elevation,
   style,
+  center,
   ...rest
 }: ContainerProps) => (
   <Native.View
     {...rest}
     style={[
       {
-        backgroundColor: bg ? theme.colors[bg] : undefined,
-        padding: p ? theme.spacing[p] : undefined,
-        paddingHorizontal: px ? theme.spacing[px] : undefined,
-        paddingVertical: py ? theme.spacing[py] : undefined,
-        paddingTop: pt ? theme.spacing[pt] : undefined,
-        paddingRight: pr ? theme.spacing[pr] : undefined,
-        paddingBottom: pb ? theme.spacing[pb] : undefined,
-        paddingLeft: pl ? theme.spacing[pl] : undefined,
-        margin: m ? theme.spacing[m] : undefined,
-        marginHorizontal: mx ? theme.spacing[mx] : undefined,
-        marginVertical: my ? theme.spacing[my] : undefined,
-        marginTop: mt ? theme.spacing[mt] : undefined,
-        marginRight: mr ? theme.spacing[mr] : undefined,
-        marginBottom: mb ? theme.spacing[mb] : undefined,
-        marginLeft: ml ? theme.spacing[ml] : undefined,
+        backgroundColor: bg ? (theme.colors[bg] as string) : undefined,
+        borderRadius,
+        // padding: p ? theme.spacing[p] : undefined,
+        // paddingHorizontal: px ? theme.spacing[px] : undefined,
+        // paddingVertical: py ? theme.spacing[py] : undefined,
+        // paddingTop: pt ? theme.spacing[pt] : undefined,
+        // paddingRight: pr ? theme.spacing[pr] : undefined,
+        // paddingBottom: pb ? theme.spacing[pb] : undefined,
+        // paddingLeft: pl ? theme.spacing[pl] : undefined,
+        // margin: m ? theme.spacing[m] : undefined,
+        // marginHorizontal: mx ? theme.spacing[mx] : undefined,
+        // marginVertical: my ? theme.spacing[my] : undefined,
+        // marginTop: mt ? theme.spacing[mt] : undefined,
+        // marginRight: mr ? theme.spacing[mr] : undefined,
+        // marginBottom: mb ? theme.spacing[mb] : undefined,
+        // marginLeft: ml ? theme.spacing[ml] : undefined,
+        gap,
+        elevation,
         width,
         height,
         minWidth,
@@ -94,8 +105,12 @@ const Container = ({
         flex,
         alignItems: align,
         justifyContent: justify,
-        flexDirection: direction,
+        flexDirection: flexDirection,
         flexWrap: wrap,
+        ...(center && {
+          alignItems: 'center',
+          justifyContent: 'center',
+        }),
       },
       style,
     ]}

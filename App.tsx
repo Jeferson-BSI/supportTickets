@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { RootNavigator } from 'src/navigation';
+import { RootNavigator } from 'src/routes';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -37,7 +37,7 @@ export default function App() {
   }
   return (
     <SafeAreaProvider>
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
 
       <RootNavigator />
     </SafeAreaProvider>
