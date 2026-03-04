@@ -10,9 +10,9 @@ const Tab = createBottomTabNavigator();
 export function MainTabs() {
   return (
     <Tab.Navigator
-      sceneContainerStyle={{ backgroundColor: colors.background.primary }}
       screenOptions={{
         headerShown: false,
+        sceneStyle: { backgroundColor: colors.background.primary },
         tabBarActiveTintColor: '#4361EE',
         tabBarInactiveTintColor: '#6C757D',
         tabBarStyle: {
