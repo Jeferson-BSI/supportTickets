@@ -7,6 +7,7 @@ import {
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthStack } from './auth/AuthStack';
 import { MainTabs } from './app/MainTabs';
+import { useAuthStore } from '@features/auth/store/authStore';
 import { colors } from '@theme/colors';
 
 const Stack = createNativeStackNavigator();
@@ -20,6 +21,8 @@ const appTheme: Theme = {
 };
 
 export function RootNavigator() {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   return (
     <NavigationContainer theme={appTheme}>
       <Stack.Navigator
@@ -28,7 +31,7 @@ export function RootNavigator() {
           contentStyle: { backgroundColor: colors.background.primary },
         }}
       >
-        {false ? (
+        {isAuthenticated ? (
           <Stack.Screen name="Main" component={MainTabs} />
         ) : (
           <Stack.Screen name="Auth" component={AuthStack} />

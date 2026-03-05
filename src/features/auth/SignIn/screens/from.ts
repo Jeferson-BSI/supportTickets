@@ -2,7 +2,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-// import { useAuthStore } from '@stores/authStore/auth_store';
 
 const useFormLogin = () => {
   const [securityTextInput, setSecurityTextInput] = useState(true);
@@ -24,7 +23,7 @@ const useFormLogin = () => {
     formState: { errors },
     setError,
   } = useForm<{ email: string; pwd: string }>({
-    defaultValues: {},
+    defaultValues: { email: 'admin@admin.com', pwd: '123456' },
     resolver: yupResolver(formSchema),
   });
 
