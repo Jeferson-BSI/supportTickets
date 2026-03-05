@@ -8,8 +8,10 @@ export const useAuthStore = create<AuthStore>((set) => ({
   isAuthenticated: false,
   isInitializing: true,
 
-  setSession: (token, user) => {
-    mmkvStorage.setString(mmkvStorage.KEYS.AUTH_TOKEN, token);
+  setSession: (token, user, persist) => {
+    if (persist) {
+      mmkvStorage.setString(mmkvStorage.KEYS.AUTH_TOKEN, token);
+    }
     set({ token, user, isAuthenticated: true });
   },
 

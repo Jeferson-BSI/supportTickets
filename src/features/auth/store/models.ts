@@ -11,7 +11,7 @@ export interface AuthState {
 }
 
 export interface AuthActions {
-  setSession: (token: string, user: AuthUser) => void;
+  setSession: (token: string, user: AuthUser, persist: boolean) => void;
   clearSession: () => void;
   initializeAuth: () => void;
 }

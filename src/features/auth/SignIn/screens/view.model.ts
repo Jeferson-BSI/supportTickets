@@ -36,7 +36,7 @@ const useSignInViewModel = (form: FormType) => {
         return;
       }
 
-      setSession(result.data.token, result.data.user);
+      setSession(result.data.token, result.data.user, rememberMe);
     } catch {
       console.log('Error');
 
