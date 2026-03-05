@@ -1,22 +1,21 @@
 import Container from '@core/components/base/Container/view';
-import Text from '@core/components/base/Text/view';
-
-import Spacer from '@core/components/base/Spacer/view';
-import Button from '@core/components/base/Button/view';
-
 import useTicketsViewModel from './view.model';
-import Header from '@core/components/layout/Header';
-import { Bell, ChevronLeft, Settings, LogOut } from 'lucide-react-native';
-import { theme } from '@core/theme/theme';
-import { SupportIcon } from '@core/assets';
 import HeaderTicket from '../components/Header';
+import TicketList from '../components/TicketList';
 
 const TicketsScreen = () => {
-  const VIEW_MODEL = useTicketsViewModel();
+  const { tickets, loading, refreshing, handleRefresh, handleTicketPress } = useTicketsViewModel();
 
   return (
-    <Container flex={1}>
+    <Container flex={1} bg="background">
       <HeaderTicket />
+      <TicketList
+        tickets={tickets}
+        loading={loading}
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
+        onTicketPress={handleTicketPress}
+      />
     </Container>
   );
 };
