@@ -17,24 +17,27 @@ const useNewTicketViewModel = (form: FormType) => {
 
   const openingDate = useMemo(() => formatFullDateTime(new Date()), []);
 
-  const onSubmit = useCallback(async (data: NewTicketFormData) => {
-    setLoading(true);
-    Keyboard.dismiss();
+  const onSubmit = useCallback(
+    async (data: NewTicketFormData) => {
+      setLoading(true);
+      Keyboard.dismiss();
 
-    try {
-      console.log('[NewTicket] Dados enviados:', JSON.stringify(data, null, 2));
+      try {
+        console.log('[NewTicket] Dados enviados:', JSON.stringify(data, null, 2));
 
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+        await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      console.log('[NewTicket] Ticket criado com sucesso!');
-      form.reset();
-      navigation.goBack();
-    } catch {
-      console.log('[NewTicket] Erro ao criar ticket.');
-    } finally {
-      setLoading(false);
-    }
-  }, [form, navigation]);
+        console.log('[NewTicket] Ticket criado com sucesso!');
+        form.reset();
+        navigation.goBack();
+      } catch {
+        console.log('[NewTicket] Erro ao criar ticket.');
+      } finally {
+        setLoading(false);
+      }
+    },
+    [form, navigation],
+  );
 
   return { handleGoBack, openingDate, onSubmit, loading };
 };

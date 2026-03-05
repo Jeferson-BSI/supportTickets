@@ -90,6 +90,7 @@ const NewTicketScreen = () => {
                 </Container>
               </Input.Content>
             </Input.Root>
+            <Spacer />
 
             <PrioritySelector
               selected={FORM.watch('priority')}
@@ -123,24 +124,6 @@ const NewTicketScreen = () => {
 };
 
 const styles = Native.StyleSheet.create({
-  softInput: {
-    height: 'auto' as any,
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
-    borderColor: 'rgba(226, 232, 240, 0.6)',
-    borderRadius: theme.radius['2xl'],
-    paddingHorizontal: 20,
-    paddingVertical: 14,
-  },
-  softInputText: {
-    fontFamily: theme.typography.fonts.light,
-    fontSize: 14,
-    height: 'auto' as any,
-    paddingHorizontal: 0,
-  },
-  softTextarea: {
-    minHeight: 120,
-    textAlignVertical: 'top',
-  },
   deadlineIcon: {
     position: 'absolute',
     right: 16,

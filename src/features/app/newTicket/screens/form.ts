@@ -21,7 +21,11 @@ const formSchema = yup.object({
     .required('Prazo é um campo obrigatório.')
     .min(10, 'Preencha a data completa (dd/mm/aaaa).')
     .test('valid-date', 'Data inválida.', (value) => !!value && isValidDate(value))
-    .test('not-past', 'A data não pode ser no passado.', (value) => !!value && isValidDate(value) && isNotPastDate(value)),
+    .test(
+      'not-past',
+      'A data não pode ser no passado.',
+      (value) => !!value && isValidDate(value) && isNotPastDate(value),
+    ),
 });
 
 const useFormNewTicket = () => {

@@ -35,7 +35,7 @@ const styles = Native.StyleSheet.create({
   input: {
     height: 48,
     flex: 1,
-    fontSize: 16,
+    fontSize: 15,
     fontFamily: theme.typography.fonts.regular,
     paddingHorizontal: 12,
     paddingVertical: 0,
