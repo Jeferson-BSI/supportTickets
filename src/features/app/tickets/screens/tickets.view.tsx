@@ -4,7 +4,16 @@ import HeaderTicket from '../components/Header';
 import TicketList from '../components/TicketList';
 
 const TicketsScreen = () => {
-  const { tickets, loading, refreshing, handleRefresh, handleTicketPress } = useTicketsViewModel();
+  const {
+    tickets,
+    loading,
+    refreshing,
+    activeFilter,
+    filterCounts,
+    handleRefresh,
+    handleTicketPress,
+    handleFilterChange,
+  } = useTicketsViewModel();
 
   return (
     <Container flex={1} bg="background">
@@ -13,8 +22,11 @@ const TicketsScreen = () => {
         tickets={tickets}
         loading={loading}
         refreshing={refreshing}
+        activeFilter={activeFilter}
+        filterCounts={filterCounts}
         onRefresh={handleRefresh}
         onTicketPress={handleTicketPress}
+        onFilterChange={handleFilterChange}
       />
     </Container>
   );

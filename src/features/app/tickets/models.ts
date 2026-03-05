@@ -1,5 +1,7 @@
 export type TicketStatus = 'open' | 'pending' | 'closed' | 'canceled';
 
+export type TicketFilterOption = TicketStatus | 'all';
+
 export interface Ticket {
   id: string;
   title: string;

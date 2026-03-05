@@ -3,16 +3,20 @@ import * as Native from 'react-native';
 import Text from '@core/components/base/Text/view';
 import { theme } from '@theme/theme';
 import TicketCard from '@core/components/layout/TicketCard';
-import type { Ticket, TicketCardProps } from '../models';
+import type { Ticket, TicketCardProps, TicketFilterOption } from '../models';
 import TicketEmptyState from './TicketEmptyState';
 import TicketListSkeleton from './TicketListSkeleton';
+import TicketFilters from './TicketFilters';
 
 interface TicketListProps {
   tickets: Ticket[];
   loading: boolean;
   refreshing?: boolean;
+  activeFilter: TicketFilterOption;
+  filterCounts: Record<TicketFilterOption, number>;
   onRefresh?: () => void;
   onTicketPress?: (ticket: Ticket) => void;
+  onFilterChange: (filter: TicketFilterOption) => void;
 }
 
 const TicketItem = React.memo(({ ticket, index, onPress }: TicketCardProps) => {
@@ -33,25 +37,42 @@ TicketItem.displayName = 'TicketItem';
 
 const keyExtractor = (item: Ticket) => item.id;
 
-const ListHeader = React.memo(() => (
-  <Native.View style={styles.listHeader}>
-    <Text font="bold" size={22} color="textPrimary" style={styles.listTitle}>
-      Meus Tickets
-    </Text>
-    <Text font="regular" size={14} color="textMuted">
-      Acompanhe o status dos seus chamados
-    </Text>
-  </Native.View>
-));
-
-ListHeader.displayName = 'ListHeader';
-
-const TicketList = ({ tickets, loading, refreshing = false, onRefresh, onTicketPress }: TicketListProps) => {
+const TicketList = ({
+  tickets,
+  loading,
+  refreshing = false,
+  activeFilter,
+  filterCounts,
+  onRefresh,
+  onTicketPress,
+  onFilterChange,
+}: TicketListProps) => {
   const renderItem = useCallback(
     ({ item, index }: { item: Ticket; index: number }) => (
       <TicketItem ticket={item} index={index} onPress={onTicketPress} />
     ),
     [onTicketPress],
+  );
+
+  const ListHeader = useCallback(
+    () => (
+      <Native.View>
+        <Native.View style={styles.listHeader}>
+          <Text font="bold" size={22} color="textPrimary" style={styles.listTitle}>
+            Meus Tickets
+          </Text>
+          <Text font="regular" size={14} color="textMuted">
+            Acompanhe o status dos seus chamados
+          </Text>
+        </Native.View>
+        <TicketFilters
+          activeFilter={activeFilter}
+          counts={filterCounts}
+          onFilterChange={onFilterChange}
+        />
+      </Native.View>
+    ),
+    [activeFilter, filterCounts, onFilterChange],
   );
 
   if (loading && tickets.length === 0) {
@@ -86,7 +107,7 @@ const styles = Native.StyleSheet.create({
   listHeader: {
     paddingHorizontal: theme.spacing.lg,
     paddingTop: theme.spacing.xl,
-    paddingBottom: theme.spacing.lg,
+    paddingBottom: theme.spacing.sm,
   },
   listTitle: {
     marginBottom: theme.spacing.xs,

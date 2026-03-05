@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { formatRelativeDate } from '@core/utils/formatRelativeDate';
-import type { Ticket } from '../models';
+import type { Ticket, TicketFilterOption } from '../models';
 
 function hoursAgo(hours: number): string {
   return new Date(Date.now() - hours * 60 * 60 * 1000).toISOString();
@@ -32,7 +32,8 @@ const MOCK_TICKETS: Ticket[] = [
   {
     id: '3',
     title: 'Exportação de relatórios PDF',
-    description: 'A exportação de relatórios em PDF foi corrigida e está funcionando normalmente.',
+    description:
+      'A exportação de relatórios em PDF foi corrigida e está funcionando normalmente.',
     status: 'closed',
     createdAt: daysAgo(1),
     category: 'Relatórios',
@@ -75,12 +76,36 @@ function formatTicketDates(tickets: Ticket[]): Ticket[] {
   }));
 }
 
+function buildFilterCounts(tickets: Ticket[]): Record<TicketFilterOption, number> {
+  const counts: Record<TicketFilterOption, number> = {
+    all: tickets.length,
+    open: 0,
+    pending: 0,
+    closed: 0,
+    canceled: 0,
+  };
+
+  for (const ticket of tickets) {
+    counts[ticket.status]++;
+  }
+
+  return counts;
+}
+
 const useTicketsViewModel = () => {
   const [rawTickets, setRawTickets] = useState<Ticket[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [activeFilter, setActiveFilter] = useState<TicketFilterOption>('all');
 
-  const tickets = useMemo(() => formatTicketDates(rawTickets), [rawTickets]);
+  const formattedTickets = useMemo(() => formatTicketDates(rawTickets), [rawTickets]);
+
+  const filterCounts = useMemo(() => buildFilterCounts(rawTickets), [rawTickets]);
+
+  const tickets = useMemo(() => {
+    if (activeFilter === 'all') return formattedTickets;
+    return formattedTickets.filter((ticket) => ticket.status === activeFilter);
+  }, [formattedTickets, activeFilter]);
 
   const loadTickets = useCallback(async () => {
     setLoading(true);
@@ -100,6 +125,10 @@ const useTicketsViewModel = () => {
     // TODO: navegar para detalhes do ticket
   }, []);
 
+  const handleFilterChange = useCallback((filter: TicketFilterOption) => {
+    setActiveFilter(filter);
+  }, []);
+
   useEffect(() => {
     loadTickets();
   }, [loadTickets]);
@@ -108,8 +137,11 @@ const useTicketsViewModel = () => {
     tickets,
     loading,
     refreshing,
+    activeFilter,
+    filterCounts,
     handleRefresh,
     handleTicketPress,
+    handleFilterChange,
   };
 };
 
