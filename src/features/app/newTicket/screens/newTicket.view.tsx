@@ -97,27 +97,28 @@ const NewTicketScreen = () => {
               onChange={(value) => FORM.setValue('priority', value)}
             />
           </Container>
-        </FormContainer>
 
-        <Button
-          bg="primary"
-          width="100%"
-          loading={VIEW_MODEL.loading}
-          disabled={VIEW_MODEL.loading}
-          height={52}
-          style={{ borderRadius: 24 }}
-          onPress={FORM.handleSubmit(VIEW_MODEL.onSubmit)}
-          accessibilityRole="button"
-          accessibilityLabel="Criar Ticket"
-        >
-          <Container flexDirection="row" align="center" justify="center" gap={8}>
-            <Text size={16} font="bold" color="white">
-              Criar Ticket
-            </Text>
-            <ArrowRight size={25} color={theme.colors.white} fontWeight={'700'} />
-          </Container>
-        </Button>
-        <Spacer height={16} />
+          <Spacer height={24} />
+
+          <Button
+            bg="primary"
+            width="100%"
+            loading={VIEW_MODEL.loading}
+            disabled={VIEW_MODEL.loading}
+            height={52}
+            style={{ borderRadius: 24 }}
+            onPress={FORM.handleSubmit(VIEW_MODEL.onSubmit)}
+            accessibilityRole="button"
+            accessibilityLabel="Criar Ticket"
+          >
+            <Container flexDirection="row" align="center" justify="center" gap={8}>
+              <Text size={16} font="bold" color="white">
+                Criar Ticket
+              </Text>
+              <ArrowRight size={25} color={theme.colors.white} fontWeight={'700'} />
+            </Container>
+          </Button>
+        </FormContainer>
       </Container>
     </Container>
   );

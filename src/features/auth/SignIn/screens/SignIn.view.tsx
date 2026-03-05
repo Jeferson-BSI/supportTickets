@@ -10,6 +10,7 @@ import Input from '@core/components/layout/Input';
 import useFormLogin from './from';
 import useSignInViewModel from './view.model';
 import { View } from 'react-native';
+import { SCREEN_HEIGHT } from '@core/utils/constants';
 
 const SignInScreen = () => {
   const FORM = useFormLogin();
@@ -17,7 +18,8 @@ const SignInScreen = () => {
 
   return (
     <FormContainer>
-      <Container style={{ paddingHorizontal: 20 }} center flex={1}>
+      <Container style={{ paddingHorizontal: 20 }} center >
+        <Spacer height={SCREEN_HEIGHT * 0.15} />
         <Container
           width={'100%'}
           center
