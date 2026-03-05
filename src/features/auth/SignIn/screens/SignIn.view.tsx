@@ -1,4 +1,4 @@
-import { SupportIcon } from '@core/assets';
+import { ArrowButtonIcon, SupportIcon } from '@core/assets';
 import Container from '@core/components/base/Container/view';
 import Text from '@core/components/base/Text/view';
 
@@ -9,6 +9,7 @@ import Switch from '@core/components/base/Switch/view';
 import Input from '@core/components/layout/Input';
 import useFormLogin from './from';
 import useSignInViewModel from './view.model';
+import { View } from 'react-native';
 
 const SignInScreen = () => {
   const FORM = useFormLogin();
@@ -88,12 +89,12 @@ const SignInScreen = () => {
             accessibilityRole="button"
             accessibilityLabel="Sign In"
           >
-            {/* <View style={styles.buttonContent}> */}
-            <Text color="white" size={16} font="semibold">
-              Entrar
-            </Text>
-            {/* <ArrowRightIcon size={18} /> */}
-            {/* </View> */}
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+              <Text color="white" size={16} font="semibold" style={{ marginBottom: 4 }}>
+                Entrar
+              </Text>
+              <ArrowButtonIcon width={16} height={16} />
+            </View>
           </Button>
         </Container>
       </Container>
