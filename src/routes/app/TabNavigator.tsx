@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useTheme } from '@theme/theme';
 import { AppTabParamList } from './app.routes.model';
 import { BottomTabBar } from './components/navigation/BottomTabBar';
+import TicketsScreen from '@features/app/tickets/screens/tickets.view';
 
 export type TabParamList = {
   Dashboard: undefined;
@@ -25,7 +26,7 @@ export function TabNavigator() {
         sceneStyle: { backgroundColor: colors.background.primary },
       }}
     >
-      <Tab.Screen name="Tickets" component={PlaceholderScreen} options={{ title: 'Tickets' }} />
+      <Tab.Screen name="Tickets" component={TicketsScreen} options={{ title: 'Tickets' }} />
       <Tab.Screen
         name="NewTickets"
         component={PlaceholderScreen}
