@@ -17,7 +17,6 @@ const SignInScreen = () => {
   return (
     <FormContainer>
       <Container style={{ paddingHorizontal: 20 }} center flex={1}>
-
         <Container
           width={'100%'}
           center
@@ -38,7 +37,7 @@ const SignInScreen = () => {
           </Text>
 
           <Spacer height={16} />
-          
+
           <Container gap={10}>
             <Input.Root>
               <Input.Label label="E-mail" />
@@ -60,7 +59,7 @@ const SignInScreen = () => {
                   placeholder="*********"
                   control={FORM.control}
                   name="pwd"
-                  secureTextEntry={true}
+                  secureTextEntry={VIEW_MODEL.securityPassword}
                 />
                 <Input.IconPassword
                   secureTextActive={VIEW_MODEL.securityPassword}
