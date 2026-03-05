@@ -12,6 +12,7 @@ import Input from '@core/components/layout/Input';
 import { FormContainer } from '@core/components/FormContainer/view';
 import Spacer from '@core/components/base/Spacer/view';
 import { dateMask } from '@core/utils/masks';
+import { SCREEN_HEIGHT } from '@core/utils/constants';
 
 const NewTicketScreen = () => {
   const FORM = useFormNewTicket();
@@ -98,7 +99,7 @@ const NewTicketScreen = () => {
             />
           </Container>
 
-          <Spacer height={24} />
+          <Spacer height={SCREEN_HEIGHT * 0.1} />
 
           <Button
             bg="primary"
