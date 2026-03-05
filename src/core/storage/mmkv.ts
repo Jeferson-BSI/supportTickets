@@ -9,7 +9,7 @@ export const storage = createMMKV({
 
 const KEYS = {
   AUTH_TOKEN: '@auth/token',
-} as const;
+};
 
 type StorageKey = (typeof KEYS)[keyof typeof KEYS];
 
@@ -31,4 +31,4 @@ export const mmkvStorage = {
   },
 
   KEYS,
-} as const;
+};

@@ -1,7 +1,7 @@
 const VALID_CREDENTIALS = {
   email: 'admin@admin.com',
   password: '123456',
-} as const;
+};
 
 export interface AuthCredentials {
   email: string;
@@ -21,9 +21,7 @@ export interface AuthError {
   message: string;
 }
 
-type AuthResult =
-  | { success: true; data: AuthResponse }
-  | { success: false; error: AuthError };
+type AuthResult = { success: true; data: AuthResponse } | { success: false; error: AuthError };
 
 function generateToken(email: string): string {
   const timestamp = Date.now();

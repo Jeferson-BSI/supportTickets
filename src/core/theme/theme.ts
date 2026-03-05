@@ -11,14 +11,14 @@ export const radius = {
   xl: 20,
   '2xl': 24,
   full: 9999,
-} as const;
+};
 
 export const theme = {
   colors,
   spacing,
   typography,
   radius,
-} as const;
+};
 
 export type Theme = typeof theme;
 

@@ -161,7 +161,7 @@ export const palette = {
   error700: '#B91C1C',
   error800: '#991B1B',
   error900: '#7F1D1D',
-} as const;
+};
 
 export const colors = {
   ...palette,
@@ -189,4 +189,4 @@ export const colors = {
     error: palette.error600,
   },
   overlay: 'rgba(15, 23, 42, 0.6)',
-} as const;
+};

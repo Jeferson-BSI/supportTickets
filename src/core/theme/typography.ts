@@ -4,8 +4,8 @@ const fontFamilies = {
   medium: 'Roboto_500Medium',
   semibold: 'Roboto_600SemiBold',
   bold: 'Roboto_700Bold',
-} as const;
+};
 
 export const typography = {
   fonts: fontFamilies,
-} as const;
+};
