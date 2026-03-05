@@ -8,7 +8,9 @@
       "@core/*": ["src/core/*"],
       "@features/*": ["src/features/*"],
       "@tests/*": ["src/tests/*"],
-      "@theme/*": ["src/core/theme/*"]
+      "@theme/*": ["src/core/theme/*"],
+      "@components/*": ["src/components/*"],
+      "@navigation/*": ["src/navigation/*"]
     },
     "types": ["jest", "@testing-library/react-native"]
   },

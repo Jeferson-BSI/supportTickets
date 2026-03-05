@@ -1,14 +1,10 @@
 import React from 'react';
-import {
-  NavigationContainer,
-  DefaultTheme,
-  Theme,
-} from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, Theme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthStack } from './auth/AuthStack';
-import { MainTabs } from './app/MainTabs';
 import { useAuthStore } from '@features/auth/store/authStore';
 import { colors } from '@theme/colors';
+import { TabNavigator } from './app/TabNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,7 +28,7 @@ export function RootNavigator() {
         }}
       >
         {isAuthenticated ? (
-          <Stack.Screen name="Main" component={MainTabs} />
+          <Stack.Screen name="Main" component={TabNavigator} />
         ) : (
           <Stack.Screen name="Auth" component={AuthStack} />
         )}
