@@ -14,7 +14,7 @@ const InputContent = ({ children, errors, style, ...rest }: InputContentProps) =
       {children}
     </Native.View>
     {errors && (
-      <Text size={12} color="error" font="medium" style={{ marginVertical: 4 }}>
+      <Text size={12} color="error" font="medium" style={{ marginTop: 4 }}>
         {String(errors.message)}
       </Text>
     )}
@@ -34,6 +34,7 @@ const styles = Native.StyleSheet.create({
     borderWidth: 1,
     borderColor: theme.colors.border,
     borderRadius: 4,
+    borderBottomWidth: 1,
   },
   contentError: {
     borderBottomWidth: 1,

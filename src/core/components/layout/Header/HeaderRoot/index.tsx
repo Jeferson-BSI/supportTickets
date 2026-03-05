@@ -22,7 +22,7 @@ const HeaderRoot = ({
       style={[
         styles.container,
         {
-          paddingTop: insets.top + theme.spacing.sm,
+          paddingTop: insets.top + theme.spacing.lg,
           backgroundColor: backgroundColor ?? theme.colors.surface,
         },
         borderBottom && styles.borderBottom,

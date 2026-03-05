@@ -17,10 +17,9 @@ type FormContainerProps = {
 export function FormContainer({ children, ...rest }: FormContainerProps) {
   const insets = useSafeAreaInsets();
 
-  const marginTop = insets.top;
   return (
     <KeyboardAvoidingView
-      style={[styles.container, { marginTop }, rest]}
+      style={[styles.container, rest]}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
     >

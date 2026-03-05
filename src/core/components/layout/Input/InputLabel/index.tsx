@@ -25,15 +25,15 @@ const styles = Native.StyleSheet.create({
     flexDirection: 'row',
   },
   asterisk: {
-    fontSize: 17,
+    fontSize: 16,
     fontFamily: theme.typography.fonts.bold,
     color: theme.colors.error,
     marginRight: 1,
   },
   title: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: theme.typography.fonts.medium,
-    marginBottom: 7,
+    marginBottom: 4,
     color: theme.colors.textPrimary,
   },
   titleError: {
