@@ -30,37 +30,9 @@ Projeto desenvolvido como parte do processo seletivo da Feel Tech.
   <img src="docs/screenshots/png2.jpeg" width="250"/>
   <img src="docs/screenshots/png7.jpeg" width="250"/>
     <img src="docs/screenshots/png4.jpeg" width="250"/>
-
-</p>
-
-<p align="center">
   <img src="docs/screenshots/png5.jpeg" width="250"/>
   <img src="docs/screenshots/png6.jpeg" width="250"/>
-</p>
 
-### Tela de Login
-
-![Login](docs/png1.jpeg)
-
-### Lista de Tickets
-
-![Tickets](docs/png2.jpeg)
-
-### Novo do Tickets
-
-![Novo do Tickets](docs/png4.jpeg)
-
-### Detalhes do Tickets
-
-![Detalhes do Tickets](docs/png4.jpeg)
-
-### Dashboard
-
-![Dashboard](docs/png5.jpeg)
-
----
-
-![Carrossel dos 5 tickets com menor tempo de resolução](docs/png6.jpeg)
 
 ## Visão Geral
 
