@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
 import { RootNavigator } from 'src/routes';
-
+import { useAppBootstrap } from '@core/bootstrap/useAppBootstrap';
+import { AppProviders } from '@core/providers/AppProviders';
 
 import {
   Roboto_400Regular,
@@ -11,8 +12,6 @@ import {
   Roboto_600SemiBold,
   useFonts,
 } from '@expo-google-fonts/roboto';
-import { useAppBootstrap } from '@core/bootstrap/useAppBootstrap';
-import { AppProviders } from '@core/providers/AppProviders';
 
 SplashScreen.preventAutoHideAsync();
 
