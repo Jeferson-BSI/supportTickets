@@ -13,6 +13,11 @@ import {
   useFonts,
 } from '@expo-google-fonts/roboto';
 
+/**
+ * App entry point.
+ * All application initialization is handled by the Bootstrap layer.
+ */
+
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
