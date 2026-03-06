@@ -1,7 +1,7 @@
 import { ScrollView } from 'react-native';
 import StatusPieChart from '../components/StatusPieChart';
 import MetricsSection from '../components/MetricsSection';
-import TicketPerformanceCarousel from '../components/TicketPerformanceCarousel/view';
+import TicketPerformanceCarousel from '../components/TicketPerformanceCarousel';
 import Header from '@core/components/layout/Header';
 import Container from '@core/components/base/Container/view';
 import Spacer from '@core/components/base/Spacer/view';
@@ -30,7 +30,7 @@ export default function DashboardScreen() {
           averageMinutes={averageMinutes}
         />
 
-        <TicketPerformanceCarousel tickets={fastestTickets} />
+        <TicketPerformanceCarousel.Root tickets={fastestTickets} />
 
         <Spacer height={SCREEN_HEIGHT * 0.1} />
       </ScrollView>
