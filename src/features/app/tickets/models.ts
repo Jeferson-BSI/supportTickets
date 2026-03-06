@@ -1,4 +1,4 @@
-export type TicketStatus = 'open' | 'pending' | 'closed' | 'canceled' | 'improcedente';
+export type TicketStatus = 'open' | 'closed' | 'canceled' | 'improcedente';
 
 export type TicketClosureStatus = 'closed' | 'improcedente' | 'canceled';
 

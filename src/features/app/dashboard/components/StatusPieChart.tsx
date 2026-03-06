@@ -16,39 +16,44 @@ type PieItem = {
 
 const STATUS_COLORS: Record<string, string> = {
   open: '#3b82f6',
-  pending: '#f59e0b',
+  improcedente: '#f59e0b',
   closed: '#10b981',
   canceled: '#ef4444',
 };
 
 const STATUS_LABELS: Record<string, string> = {
   open: 'Abertos',
-  pending: 'Pendentes',
+  improcedente: 'Improcedentes',
   closed: 'Encerrados',
   canceled: 'Cancelados',
 };
 
+const STATUS_KEYS = ['open', 'improcedente', 'closed', 'canceled'] as const;
+
 function buildPieData(counts: TicketCountsByStatus): PieItem[] {
-  return (['open', 'pending', 'closed', 'canceled'] as const).map((key) => ({
+  return STATUS_KEYS.map((key) => ({
     label: STATUS_LABELS[key],
-    value: counts[key],
+    value: counts[key] ?? 0,
     color: STATUS_COLORS[key],
   }));
 }
 
 const renderDot = (color: string) => <View style={[styles.dot, { backgroundColor: color }]} />;
 
+const EMPTY_CHART_COLOR = '#E5E7EB';
+
 export default function StatusPieChart({ counts }: Props) {
   const pieData = buildPieData(counts);
   const total = pieData.reduce((acc, item) => acc + item.value, 0);
 
-  if (total === 0) return null;
-
-  const chartData = pieData.map((item) => ({
-    value: item.value,
-    color: item.color,
-    text: `${Math.round((item.value / total) * 100)}%`,
-  }));
+  const chartData =
+    total === 0
+      ? [{ value: 1, color: EMPTY_CHART_COLOR, text: '0%' }]
+      : pieData.map((item) => ({
+          value: item.value,
+          color: item.color,
+          text: `${Math.round((item.value / total) * 100)}%`,
+        }));
 
   return (
     <Container
@@ -76,7 +81,7 @@ export default function StatusPieChart({ counts }: Props) {
 
       <View style={styles.legendContainer}>
         {pieData.map((item) => {
-          const percent = Math.round((item.value / total) * 100);
+          const percent = total === 0 ? 0 : Math.round((item.value / total) * 100);
           return (
             <View key={item.label} style={styles.legendItem}>
               {renderDot(item.color)}

@@ -60,7 +60,6 @@ export async function getCountsByStatus(): Promise<TicketCountsByStatus> {
   const counts: TicketCountsByStatus = {
     all: 0,
     open: 0,
-    pending: 0,
     closed: 0,
     canceled: 0,
     improcedente: 0,

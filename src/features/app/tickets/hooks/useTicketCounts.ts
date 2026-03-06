@@ -9,7 +9,6 @@ const FIVE_MINUTES_MS = 1000 * 60 * 5;
 const EMPTY_COUNTS: TicketCountsByStatus = {
   all: 0,
   open: 0,
-  pending: 0,
   closed: 0,
   canceled: 0,
   improcedente: 0,
