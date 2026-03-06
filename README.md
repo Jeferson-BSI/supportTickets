@@ -1,3 +1,7 @@
+# Teste Técnico - Desenvolvedor Mobile (React Native)
+
+Projeto desenvolvido como parte do processo seletivo da Feel Tech.
+
 # Documentação do Projeto SupportTickets
 
 ## Índice
