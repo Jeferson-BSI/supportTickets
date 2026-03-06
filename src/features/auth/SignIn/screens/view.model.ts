@@ -23,6 +23,7 @@ const useSignInViewModel = (form: FormType) => {
   async function onSubmit(data: LoginFormData) {
     setLoading(true);
     setAuthError(null);
+    form.clearErrors();
     Keyboard.dismiss();
 
     try {
@@ -32,7 +33,9 @@ const useSignInViewModel = (form: FormType) => {
       });
 
       if (!result.success) {
-        setAuthError(result.error.message);
+        const message = result.error.message;
+        setAuthError(message);
+        form.setError('pwd', { type: 'manual', message });
         return;
       }
 

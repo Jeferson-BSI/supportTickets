@@ -22,6 +22,7 @@ const useFormLogin = () => {
     handleSubmit,
     formState: { errors },
     setError,
+    clearErrors,
   } = useForm<{ email: string; pwd: string }>({
     defaultValues: { email: 'admin@admin.com', pwd: '123456' },
     resolver: yupResolver(formSchema),
@@ -34,6 +35,7 @@ const useFormLogin = () => {
     handleSubmit,
     setSecurityTextInput,
     setError,
+    clearErrors,
   };
 };
 
