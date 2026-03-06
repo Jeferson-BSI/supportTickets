@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useAuthStore } from '@features/auth/store/authStore';
+import { runMigrations } from '@core/database/migrations/runMigrations';
 
 import {
   Roboto_400Regular,
@@ -16,6 +17,8 @@ import {
 } from '@expo-google-fonts/roboto';
 
 const queryClient = new QueryClient();
+
+runMigrations();
 
 export default function App() {
   const initializeAuth = useAuthStore((state) => state.initializeAuth);

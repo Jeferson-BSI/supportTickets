@@ -28,3 +28,9 @@ export interface TicketCardProps {
   index: number;
   onPress?: (ticket: Ticket) => void;
 }
+
+export interface ITicketRepository {
+  getAll(): Promise<Ticket[]>;
+  create(ticket: Ticket): Promise<void>;
+  updateStatus(id: string, status: TicketStatus): Promise<void>;
+}
