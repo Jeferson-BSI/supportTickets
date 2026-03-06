@@ -2,8 +2,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { isValidDate, isNotPastDate } from '@core/utils/formatDate';
+import type { TicketPriority } from '@features/app/tickets/models';
 
-export type Priority = 'low' | 'medium' | 'high';
+export type Priority = TicketPriority;
 
 export interface NewTicketFormData {
   title: string;
