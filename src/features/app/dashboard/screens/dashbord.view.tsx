@@ -25,14 +25,11 @@ export default function DashboardScreen() {
       >
         <StatusPieChart counts={counts} />
 
-        <MetricsSection
-          totalTickets={counts.all}
-          averageMinutes={averageMinutes}
-        />
+        <MetricsSection totalTickets={counts.all} averageMinutes={averageMinutes} />
 
         <TicketPerformanceCarousel.Root tickets={fastestTickets} />
 
-        <Spacer height={SCREEN_HEIGHT * 0.1} />
+        <Spacer height={SCREEN_HEIGHT * 0.01} />
       </ScrollView>
     </Container>
   );
