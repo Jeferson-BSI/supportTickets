@@ -16,6 +16,14 @@ export class TicketRepository implements ITicketRepository {
     return dataSource.getCountsByStatus();
   }
 
+  async getAverageResolutionMinutes(): Promise<number> {
+    return dataSource.getAverageResolutionMinutes();
+  }
+
+  async getTop5Fastest(): Promise<Ticket[]> {
+    return dataSource.getTop5FastestTickets();
+  }
+
   async create(ticket: Ticket): Promise<void> {
     return dataSource.createTicket(ticket);
   }

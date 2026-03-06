@@ -1,11 +1,15 @@
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native';
 import StatusPieChart from '../components/StatusPieChart';
 import MetricsSection from '../components/MetricsSection';
-import FastestTicketsCarousel from '../components/FastestTicketsCarousel';
+import TicketPerformanceCarousel from '../components/TicketPerformanceCarousel/view';
 import Header from '@core/components/layout/Header';
 import Container from '@core/components/base/Container/view';
+import Spacer from '@core/components/base/Spacer/view';
+import { useDashboardViewModel } from '../viewModels/useDashboardViewModel';
 
 export default function DashboardScreen() {
+  const { counts, averageMinutes, fastestTickets } = useDashboardViewModel();
+
   return (
     <Container>
       <Header.Root>
@@ -18,11 +22,16 @@ export default function DashboardScreen() {
           gap: 24,
         }}
       >
-        <StatusPieChart open={10} closed={25} canceled={4} improcedente={3} />
+        <StatusPieChart counts={counts} />
 
-        <MetricsSection />
+        <MetricsSection
+          totalTickets={counts.all}
+          averageMinutes={averageMinutes}
+        />
 
-        <FastestTicketsCarousel />
+        <TicketPerformanceCarousel tickets={fastestTickets} />
+
+        <Spacer height={24} />
       </ScrollView>
     </Container>
   );

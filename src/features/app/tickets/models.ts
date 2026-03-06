@@ -38,6 +38,8 @@ export type TicketCountsByStatus = Record<TicketFilterOption, number>;
 export interface ITicketRepository {
   getAll(filters?: TicketFilters): Promise<Ticket[]>;
   getCountsByStatus(): Promise<TicketCountsByStatus>;
+  getAverageResolutionMinutes(): Promise<number>;
+  getTop5Fastest(): Promise<Ticket[]>;
   create(ticket: Ticket): Promise<void>;
   updateStatus(id: string, status: TicketStatus): Promise<void>;
 }

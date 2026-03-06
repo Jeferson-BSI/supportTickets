@@ -25,6 +25,14 @@ export function createTicketService(repository: ITicketRepository) {
       return repository.getCountsByStatus();
     },
 
+    async getAverageResolutionMinutes(): Promise<number> {
+      return repository.getAverageResolutionMinutes();
+    },
+
+    async getTop5Fastest(): Promise<Ticket[]> {
+      return repository.getTop5Fastest();
+    },
+
     async createTicket(input: CreateTicketInput): Promise<Ticket> {
       const ticket: Ticket = {
         id: generateId(),

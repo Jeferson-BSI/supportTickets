@@ -43,20 +43,25 @@ function MetricCard({ icon, iconBg, label, value, unit }: MetricCardProps) {
   );
 }
 
-const MetricsSection = () => {
+type Props = {
+  totalTickets: number;
+  averageMinutes: number;
+};
+
+const MetricsSection = ({ totalTickets, averageMinutes }: Props) => {
   return (
     <Container flexDirection="row" width="100%" gap={14}>
       <MetricCard
         icon={<Ticket size={24} color={theme.colors.primary700} />}
         iconBg={theme.colors.primary100}
         label="Total Tickets"
-        value="120"
+        value={String(totalTickets)}
       />
       <MetricCard
         icon={<Timer size={24} color={theme.colors.success700} />}
         iconBg={theme.colors.success100}
         label="Média de tempo de encerramento"
-        value="45"
+        value={String(averageMinutes)}
         unit="min"
       />
     </Container>
