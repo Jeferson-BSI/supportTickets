@@ -99,7 +99,7 @@ const NewTicketScreen = () => {
             />
           </Container>
 
-          <Spacer height={SCREEN_HEIGHT * 0.1} />
+          <Spacer height={SCREEN_HEIGHT * 0.09} />
 
           <Button
             bg="primary"
