@@ -12,6 +12,7 @@ const EMPTY_COUNTS: TicketCountsByStatus = {
   pending: 0,
   closed: 0,
   canceled: 0,
+  improcedente: 0,
 };
 
 export function useTicketCounts() {

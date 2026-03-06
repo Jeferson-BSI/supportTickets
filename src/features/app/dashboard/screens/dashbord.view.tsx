@@ -6,6 +6,7 @@ import Header from '@core/components/layout/Header';
 import Container from '@core/components/base/Container/view';
 import Spacer from '@core/components/base/Spacer/view';
 import { useDashboardViewModel } from '../viewModels/useDashboardViewModel';
+import { SCREEN_HEIGHT } from '@core/utils/constants';
 
 export default function DashboardScreen() {
   const { counts, averageMinutes, fastestTickets } = useDashboardViewModel();
@@ -31,7 +32,7 @@ export default function DashboardScreen() {
 
         <TicketPerformanceCarousel tickets={fastestTickets} />
 
-        <Spacer height={24} />
+        <Spacer height={SCREEN_HEIGHT * 0.1} />
       </ScrollView>
     </Container>
   );

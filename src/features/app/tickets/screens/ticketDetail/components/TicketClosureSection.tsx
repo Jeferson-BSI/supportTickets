@@ -1,38 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as Native from 'react-native';
+import { Controller, useFormContext } from 'react-hook-form';
 import { Lock } from 'lucide-react-native';
 import { theme } from '@core/theme/theme';
 import Container from '@core/components/base/Container/view';
 import Text from '@core/components/base/Text/view';
 import Button from '@core/components/base/Button/view';
 import Spacer from '@core/components/base/Spacer/view';
-import type { TicketClosureStatus } from '@features/app/tickets/models';
 import ClosureStatusDropdown from './ClosureStatusDropdown';
 import type { ClosureStatusOption } from '../ticketDetail.viewModel';
+import type { ClosureFormData } from '../closureForm';
 
 interface TicketClosureSectionProps {
-  closureDescription: string;
-  onClosureDescriptionChange: (text: string) => void;
-  selectedStatus: TicketClosureStatus | null;
-  dropdownOpen: boolean;
-  closing: boolean;
   options: ClosureStatusOption[];
-  onToggleDropdown: () => void;
-  onSelectStatus: (status: TicketClosureStatus) => void;
-  onCloseTicket: () => void;
+  onSubmit: (data: ClosureFormData) => void;
+  closing: boolean;
 }
 
 const TicketClosureSection = ({
-  closureDescription,
-  onClosureDescriptionChange,
-  selectedStatus,
-  dropdownOpen,
-  closing,
   options,
-  onToggleDropdown,
-  onSelectStatus,
-  onCloseTicket,
+  onSubmit,
+  closing,
 }: TicketClosureSectionProps) => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { control, handleSubmit, formState: { errors } } = useFormContext<ClosureFormData>();
+
   return (
     <Native.View style={styles.card}>
       <Native.View style={styles.sectionTitleRow}>
@@ -48,26 +40,53 @@ const TicketClosureSection = ({
         DESCRIÇÃO DO ENCERRAMENTO
       </Text>
       <Spacer height={6} />
-      <Native.TextInput
-        style={styles.textArea}
-        placeholder="Descreva o motivo do encerramento..."
-        placeholderTextColor={theme.colors.textMuted}
-        value={closureDescription}
-        onChangeText={onClosureDescriptionChange}
-        multiline
-        numberOfLines={4}
-        textAlignVertical="top"
+      <Controller
+        control={control}
+        name="closureDescription"
+        render={({ field }) => (
+          <>
+            <Native.TextInput
+              style={[styles.textArea, errors.closureDescription && styles.textAreaError]}
+              placeholder="Descreva o motivo do encerramento..."
+              placeholderTextColor={theme.colors.textMuted}
+              value={field.value}
+              onChangeText={field.onChange}
+              multiline
+              numberOfLines={4}
+              textAlignVertical="top"
+            />
+            {errors.closureDescription && (
+              <Text size={12} color="error" font="medium" style={styles.errorText}>
+                {errors.closureDescription.message}
+              </Text>
+            )}
+          </>
+        )}
       />
 
       <Spacer height={20} />
 
-      <ClosureStatusDropdown
-        options={options}
-        selectedStatus={selectedStatus}
-        isOpen={dropdownOpen}
-        onToggle={onToggleDropdown}
-        onSelect={onSelectStatus}
+      <Controller
+        control={control}
+        name="closureStatus"
+        render={({ field }) => (
+          <ClosureStatusDropdown
+            options={options}
+            selectedStatus={field.value ?? null}
+            isOpen={dropdownOpen}
+            onToggle={() => setDropdownOpen((prev) => !prev)}
+            onSelect={(status) => {
+              field.onChange(status);
+              setDropdownOpen(false);
+            }}
+          />
+        )}
       />
+      {errors.closureStatus && (
+        <Text size={12} color="error" font="medium" style={styles.errorText}>
+          {errors.closureStatus.message}
+        </Text>
+      )}
 
       <Spacer height={24} />
 
@@ -78,7 +97,7 @@ const TicketClosureSection = ({
         loading={closing}
         disabled={closing}
         style={styles.closeButton}
-        onPress={onCloseTicket}
+        onPress={handleSubmit(onSubmit)}
         accessibilityRole="button"
         accessibilityLabel="Encerrar Ticket"
       >
@@ -94,6 +113,12 @@ const TicketClosureSection = ({
 };
 
 const styles = Native.StyleSheet.create({
+  errorText: {
+    marginTop: 4,
+  },
+  textAreaError: {
+    borderColor: theme.colors.error,
+  },
   card: {
     backgroundColor: theme.colors.surface,
     borderRadius: theme.radius.lg,

@@ -37,15 +37,17 @@ function mapRowToTicket(row: TicketRow): Ticket {
 }
 
 export async function getTickets(filters?: TicketFilters): Promise<Ticket[]> {
-  const hasStatusFilter = filters?.status !== undefined;
+  const status = filters?.status;
 
-  const query = hasStatusFilter
-    ? 'SELECT * FROM tickets WHERE status = ? ORDER BY created_at DESC'
-    : 'SELECT * FROM tickets ORDER BY created_at DESC';
+  const query =
+    status !== undefined
+      ? 'SELECT * FROM tickets WHERE status = ? ORDER BY created_at DESC'
+      : 'SELECT * FROM tickets ORDER BY created_at DESC';
 
-  const rows = hasStatusFilter
-    ? await db.getAllAsync<TicketRow>(query, [filters.status])
-    : await db.getAllAsync<TicketRow>(query);
+  const rows =
+    status !== undefined
+      ? await db.getAllAsync<TicketRow>(query, [status])
+      : await db.getAllAsync<TicketRow>(query);
 
   return rows.map(mapRowToTicket);
 }

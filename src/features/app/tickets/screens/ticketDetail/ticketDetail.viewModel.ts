@@ -6,6 +6,7 @@ import { ticketService } from '../../services';
 import { TICKETS_QUERY_KEY } from '../../hooks/useTickets';
 import type { Ticket, TicketClosureStatus } from '../../models';
 import type { AppStackParamList } from '../../../../../routes/app/app.routes.model';
+import type { ClosureFormData } from './closureForm';
 
 type TicketDetailRoute = RouteProp<AppStackParamList, 'TicketDetail'>;
 
@@ -28,10 +29,7 @@ const useTicketDetailViewModel = () => {
 
   const [ticket, setTicket] = useState<Ticket | null>(null);
   const [loading, setLoading] = useState(true);
-  const [closureDescription, setClosureDescription] = useState('');
-  const [selectedStatus, setSelectedStatus] = useState<TicketClosureStatus | null>(null);
   const [closing, setClosing] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const isOpen = ticket?.status === 'open';
 
@@ -53,50 +51,32 @@ const useTicketDetailViewModel = () => {
     navigation.goBack();
   }, [navigation]);
 
-  const toggleDropdown = useCallback(() => {
-    setDropdownOpen((prev) => !prev);
-  }, []);
-
-  const handleSelectStatus = useCallback((status: TicketClosureStatus) => {
-    setSelectedStatus(status);
-    setDropdownOpen(false);
-  }, []);
-
-  const closeTicket = useCallback(async () => {
-    if (!closureDescription.trim()) {
-      Alert.alert('Campo obrigatório', 'Preencha a descrição de encerramento.');
-      return;
-    }
-
-    if (!selectedStatus) {
-      Alert.alert('Campo obrigatório', 'Selecione o status de encerramento.');
-      return;
-    }
-
-    try {
-      setClosing(true);
-      await ticketService.closeTicket(ticketId, selectedStatus, closureDescription.trim());
-      await queryClient.invalidateQueries({ queryKey: TICKETS_QUERY_KEY });
-      navigation.goBack();
-    } catch {
-      Alert.alert('Erro', 'Não foi possível encerrar o ticket. Tente novamente.');
-    } finally {
-      setClosing(false);
-    }
-  }, [ticketId, closureDescription, selectedStatus, queryClient, navigation]);
+  const closeTicket = useCallback(
+    async (data: ClosureFormData) => {
+      try {
+        setClosing(true);
+        await ticketService.closeTicket(
+          ticketId,
+          data.closureStatus,
+          data.closureDescription.trim(),
+        );
+        await queryClient.invalidateQueries({ queryKey: TICKETS_QUERY_KEY });
+        navigation.goBack();
+      } catch {
+        Alert.alert('Erro', 'Não foi possível encerrar o ticket. Tente novamente.');
+      } finally {
+        setClosing(false);
+      }
+    },
+    [ticketId, queryClient, navigation],
+  );
 
   return {
     ticket,
     loading,
     isOpen,
-    closureDescription,
-    setClosureDescription,
-    selectedStatus,
-    dropdownOpen,
     closing,
     handleGoBack,
-    toggleDropdown,
-    handleSelectStatus,
     closeTicket,
   };
 };

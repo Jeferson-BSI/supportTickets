@@ -1,5 +1,6 @@
 import React from 'react';
 import * as Native from 'react-native';
+import { FormProvider } from 'react-hook-form';
 import { ArrowLeft } from 'lucide-react-native';
 import { theme } from '@core/theme/theme';
 import Container from '@core/components/base/Container/view';
@@ -7,14 +8,13 @@ import Text from '@core/components/base/Text/view';
 import Spacer from '@core/components/base/Spacer/view';
 import Header from '@core/components/layout/Header';
 import useTicketDetailViewModel, { CLOSURE_STATUS_OPTIONS } from './ticketDetail.viewModel';
-import {
-  TicketInfoCard,
-  TicketClosureSection,
-  TicketClosedBanner,
-} from './components';
+import useClosureForm from './closureForm';
+import { TicketInfoCard, TicketClosureSection, TicketClosedBanner } from './components';
+import { FormContainer } from '@core/components/FormContainer/view';
 
 const TicketDetailScreen = () => {
   const vm = useTicketDetailViewModel();
+  const closureForm = useClosureForm();
 
   if (vm.loading) {
     return (
@@ -46,32 +46,25 @@ const TicketDetailScreen = () => {
         <Header.Title title="Detalhes do Ticket" />
       </Header.Root>
 
-      <Native.ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps="handled"
-      >
-        <TicketInfoCard ticket={vm.ticket} />
+      <FormContainer>
+        <Container style={styles.scrollContent}>
+          <TicketInfoCard ticket={vm.ticket} />
 
-        {vm.isOpen ? (
-          <TicketClosureSection
-            closureDescription={vm.closureDescription}
-            onClosureDescriptionChange={vm.setClosureDescription}
-            selectedStatus={vm.selectedStatus}
-            dropdownOpen={vm.dropdownOpen}
-            closing={vm.closing}
-            options={CLOSURE_STATUS_OPTIONS}
-            onToggleDropdown={vm.toggleDropdown}
-            onSelectStatus={vm.handleSelectStatus}
-            onCloseTicket={vm.closeTicket}
-          />
-        ) : (
-          <TicketClosedBanner closureDescription={vm.ticket.closureDescription} />
-        )}
+          {vm.isOpen ? (
+            <FormProvider {...closureForm}>
+              <TicketClosureSection
+                options={CLOSURE_STATUS_OPTIONS}
+                onSubmit={vm.closeTicket}
+                closing={vm.closing}
+              />
+            </FormProvider>
+          ) : (
+            <TicketClosedBanner closureDescription={vm.ticket.closureDescription} />
+          )}
 
-        <Spacer height={40} />
-      </Native.ScrollView>
+          <Spacer height={40} />
+        </Container>
+      </FormContainer>
     </Container>
   );
 };
