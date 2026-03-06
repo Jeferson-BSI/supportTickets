@@ -1,39 +1,20 @@
-import { useCallback, useMemo, useState } from 'react';
-import type { Ticket, TicketFilterOption } from '../models';
+import { useCallback, useState } from 'react';
+import type { Ticket, TicketFilterOption, TicketStatus } from '../models';
 import { useTickets } from '../hooks/useTickets';
+import { useTicketCounts } from '../hooks/useTicketCounts';
 
-function buildFilterCounts(tickets: Ticket[]): Record<TicketFilterOption, number> {
-  const counts: Record<TicketFilterOption, number> = {
-    all: tickets.length,
-    open: 0,
-    pending: 0,
-    closed: 0,
-    canceled: 0,
-  };
-
-  for (const ticket of tickets) {
-    counts[ticket.status as TicketFilterOption]++;
-  }
-
-  return counts;
-}
-
-function filterTickets(tickets: Ticket[], filter: TicketFilterOption): Ticket[] {
-  if (filter === 'all') return tickets;
-  return tickets.filter((ticket) => ticket.status === filter);
+function toStatusFilter(filter: TicketFilterOption): TicketStatus | undefined {
+  return filter === 'all' ? undefined : filter;
 }
 
 const useTicketsViewModel = () => {
-  const { tickets: ticketsData, isLoading, isError, refetch } = useTickets();
-  const [refreshing, setRefreshing] = useState(false);
   const [activeFilter, setActiveFilter] = useState<TicketFilterOption>('all');
+  const [refreshing, setRefreshing] = useState(false);
 
-  const filterCounts = useMemo(() => buildFilterCounts(ticketsData), [ticketsData]);
-
-  const tickets = useMemo(
-    () => filterTickets(ticketsData, activeFilter),
-    [ticketsData, activeFilter],
+  const { tickets, isLoading, isError, refetch } = useTickets(
+    toStatusFilter(activeFilter),
   );
+  const { counts: filterCounts } = useTicketCounts();
 
   const handleRefresh = useCallback(async () => {
     try {
@@ -44,7 +25,7 @@ const useTicketsViewModel = () => {
     }
   }, [refetch]);
 
-  const handleTicketPress = useCallback((ticket: Ticket) => {
+  const handleTicketPress = useCallback((_ticket: Ticket) => {
     // TODO: navegar para detalhes do ticket
   }, []);
 

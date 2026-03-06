@@ -29,8 +29,15 @@ export interface TicketCardProps {
   onPress?: (ticket: Ticket) => void;
 }
 
+export interface TicketFilters {
+  status?: TicketStatus;
+}
+
+export type TicketCountsByStatus = Record<TicketFilterOption, number>;
+
 export interface ITicketRepository {
-  getAll(): Promise<Ticket[]>;
+  getAll(filters?: TicketFilters): Promise<Ticket[]>;
+  getCountsByStatus(): Promise<TicketCountsByStatus>;
   create(ticket: Ticket): Promise<void>;
   updateStatus(id: string, status: TicketStatus): Promise<void>;
 }

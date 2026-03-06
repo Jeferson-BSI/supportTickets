@@ -1,5 +1,10 @@
 import { db } from '@core/database/client/db';
-import type { Ticket, TicketStatus } from '../../models';
+import type {
+  Ticket,
+  TicketStatus,
+  TicketFilters,
+  TicketCountsByStatus,
+} from '../../models';
 
 interface TicketRow {
   id: string;
@@ -10,6 +15,11 @@ interface TicketRow {
   created_at: number;
   deadline: number;
   closed_at: number | null;
+}
+
+interface CountRow {
+  status: TicketStatus;
+  count: number;
 }
 
 function mapRowToTicket(row: TicketRow): Ticket {
@@ -26,12 +36,41 @@ function mapRowToTicket(row: TicketRow): Ticket {
   };
 }
 
-export async function getTickets(): Promise<Ticket[]> {
-  const rows = await db.getAllAsync<TicketRow>(
-    'SELECT * FROM tickets ORDER BY created_at DESC',
-  );
+export async function getTickets(filters?: TicketFilters): Promise<Ticket[]> {
+  const params: string[] = [];
+  let query = 'SELECT * FROM tickets';
+
+  if (filters?.status) {
+    query += ' WHERE status = ?';
+    params.push(filters.status);
+  }
+
+  query += ' ORDER BY created_at DESC';
+
+  const rows = await db.getAllAsync<TicketRow>(query, params);
 
   return rows.map(mapRowToTicket);
+}
+
+export async function getCountsByStatus(): Promise<TicketCountsByStatus> {
+  const rows = await db.getAllAsync<CountRow>(
+    'SELECT status, COUNT(*) as count FROM tickets GROUP BY status',
+  );
+
+  const counts: TicketCountsByStatus = {
+    all: 0,
+    open: 0,
+    pending: 0,
+    closed: 0,
+    canceled: 0,
+  };
+
+  for (const row of rows) {
+    counts[row.status] = row.count;
+    counts.all += row.count;
+  }
+
+  return counts;
 }
 
 export async function createTicket(ticket: Ticket): Promise<void> {

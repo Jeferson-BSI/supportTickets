@@ -1,4 +1,10 @@
-import type { Ticket, CreateTicketInput, ITicketRepository } from '../models';
+import type {
+  Ticket,
+  CreateTicketInput,
+  TicketFilters,
+  TicketCountsByStatus,
+  ITicketRepository,
+} from '../models';
 
 function parseBrDateToTimestamp(dateStr: string): number {
   const [day, month, year] = dateStr.split('/');
@@ -11,8 +17,12 @@ function generateId(): string {
 
 export function createTicketService(repository: ITicketRepository) {
   return {
-    async getTickets(): Promise<Ticket[]> {
-      return repository.getAll();
+    async getTickets(filters?: TicketFilters): Promise<Ticket[]> {
+      return repository.getAll(filters);
+    },
+
+    async getCountsByStatus(): Promise<TicketCountsByStatus> {
+      return repository.getCountsByStatus();
     },
 
     async createTicket(input: CreateTicketInput): Promise<Ticket> {

@@ -1,9 +1,19 @@
-import type { Ticket, TicketStatus, ITicketRepository } from '../../models';
+import type {
+  Ticket,
+  TicketStatus,
+  TicketFilters,
+  TicketCountsByStatus,
+  ITicketRepository,
+} from '../../models';
 import * as dataSource from '../datasources/TicketSQLiteDataSource';
 
 export class TicketRepository implements ITicketRepository {
-  async getAll(): Promise<Ticket[]> {
-    return dataSource.getTickets();
+  async getAll(filters?: TicketFilters): Promise<Ticket[]> {
+    return dataSource.getTickets(filters);
+  }
+
+  async getCountsByStatus(): Promise<TicketCountsByStatus> {
+    return dataSource.getCountsByStatus();
   }
 
   async create(ticket: Ticket): Promise<void> {
