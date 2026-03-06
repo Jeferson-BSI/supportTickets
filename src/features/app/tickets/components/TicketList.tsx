@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react';
 import * as Native from 'react-native';
+import { AlertTriangle } from 'lucide-react-native';
 import Text from '@core/components/base/Text/view';
+import Button from '@core/components/base/Button/view';
 import { theme } from '@theme/theme';
 import TicketCard from '@core/components/layout/TicketCard';
 import type { Ticket, TicketCardProps, TicketFilterOption } from '../models';
@@ -11,6 +13,7 @@ import TicketFilters from './TicketFilters';
 interface TicketListProps {
   tickets: Ticket[];
   loading: boolean;
+  isError: boolean;
   refreshing?: boolean;
   activeFilter: TicketFilterOption;
   filterCounts: Record<TicketFilterOption, number>;
@@ -40,6 +43,7 @@ const keyExtractor = (item: Ticket) => item.id;
 const TicketList = ({
   tickets,
   loading,
+  isError,
   refreshing = false,
   activeFilter,
   filterCounts,
@@ -84,6 +88,32 @@ const TicketList = ({
     );
   }
 
+  if (isError) {
+    return (
+      <>
+        <ListHeader />
+        <Native.View style={styles.errorContainer}>
+          <Native.View style={styles.errorIconWrapper}>
+            <AlertTriangle size={48} color={theme.colors.error700} />
+          </Native.View>
+          <Text font="semibold" size={18} color="textPrimary" style={styles.errorTitle}>
+            Erro ao carregar tickets
+          </Text>
+          <Text font="regular" size={14} color="textMuted" align="center">
+            Não foi possível carregar seus tickets. Tente novamente.
+          </Text>
+          {onRefresh && (
+            <Button onPress={onRefresh} style={styles.retryButton}>
+              <Text font="semibold" size={14} color="white">
+                Tentar novamente
+              </Text>
+            </Button>
+          )}
+        </Native.View>
+      </>
+    );
+  }
+
   return (
     <Native.FlatList<Ticket>
       data={tickets}
@@ -111,6 +141,28 @@ const styles = Native.StyleSheet.create({
   },
   listTitle: {
     marginBottom: theme.spacing.xs,
+  },
+  errorContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: theme.spacing['3xl'],
+    paddingVertical: theme.spacing['6xl'],
+  },
+  errorIconWrapper: {
+    width: 80,
+    height: 80,
+    borderRadius: theme.radius.full,
+    backgroundColor: theme.colors.error50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: theme.spacing.lg,
+  },
+  errorTitle: {
+    marginBottom: theme.spacing.sm,
+  },
+  retryButton: {
+    marginTop: theme.spacing.xl,
   },
 });
 

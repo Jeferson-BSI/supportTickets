@@ -8,6 +8,8 @@ export interface Ticket {
   description: string;
   status: TicketStatus;
   createdAt: string;
+  deadline: number;
+  closedAt?: string;
   category: string;
 }
 

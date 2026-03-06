@@ -3,6 +3,7 @@ import * as Native from 'react-native';
 import { Tag, Clock } from 'lucide-react-native';
 import Text from '@core/components/base/Text/view';
 import { theme } from '@theme/theme';
+import { formatRelativeDate } from '@core/utils/formatRelativeDate';
 
 interface TicketCardFooterProps {
   category: string;
@@ -19,7 +20,7 @@ const TicketCardFooter = React.memo(({ category, createdAt }: TicketCardFooterPr
     </Native.View>
     <Native.View style={styles.item}>
       <Clock size={ICON_SIZE} color={theme.colors.text.muted} />
-      <Text font="regular" size={12} color="textMuted">{createdAt}</Text>
+      <Text font="regular" size={12} color="textMuted">{formatRelativeDate(createdAt)}</Text>
     </Native.View>
   </Native.View>
 ));

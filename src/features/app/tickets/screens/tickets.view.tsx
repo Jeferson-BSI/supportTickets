@@ -7,6 +7,7 @@ const TicketsScreen = () => {
   const {
     tickets,
     loading,
+    isError,
     refreshing,
     activeFilter,
     filterCounts,
@@ -21,6 +22,7 @@ const TicketsScreen = () => {
       <TicketList
         tickets={tickets}
         loading={loading}
+        isError={isError}
         refreshing={refreshing}
         activeFilter={activeFilter}
         filterCounts={filterCounts}
