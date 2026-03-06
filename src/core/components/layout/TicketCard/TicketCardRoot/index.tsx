@@ -3,7 +3,6 @@ import * as Native from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
-  withTiming,
   withSpring,
   FadeInDown,
 } from 'react-native-reanimated';
@@ -39,6 +38,7 @@ const TicketCardRoot = ({ children, index, onPress, style, ...rest }: TicketCard
         .duration(400)
         .springify()
         .damping(18)}
+      style={styles.shadowWrapper}
     >
       <AnimatedPressable
         onPress={onPress}
@@ -54,20 +54,24 @@ const TicketCardRoot = ({ children, index, onPress, style, ...rest }: TicketCard
 };
 
 const styles = Native.StyleSheet.create({
+  shadowWrapper: {
+    marginHorizontal: theme.spacing.lg,
+    marginBottom: theme.spacing.md,
+    borderRadius: theme.radius.lg,
+    shadowColor: theme.colors.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    elevation: 2,
+  },
   card: {
     backgroundColor: theme.colors.surface,
     borderRadius: theme.radius.lg,
     borderWidth: 1,
     borderColor: theme.colors.border,
     padding: theme.spacing.lg,
-    marginHorizontal: theme.spacing.lg,
-    marginBottom: theme.spacing.md,
     gap: theme.spacing.md,
-    shadowColor: theme.colors.black,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 8,
-    elevation: 2,
+    overflow: 'hidden' ,
   },
 });
 
