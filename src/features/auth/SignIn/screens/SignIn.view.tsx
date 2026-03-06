@@ -18,7 +18,7 @@ const SignInScreen = () => {
 
   return (
     <FormContainer>
-      <Container style={{ paddingHorizontal: 20 }} center >
+      <Container style={{ paddingHorizontal: 20 }} center>
         <Spacer height={SCREEN_HEIGHT * 0.15} />
         <Container
           width={'100%'}
@@ -74,7 +74,7 @@ const SignInScreen = () => {
             <Container flexDirection="row" gap={10} align="center">
               <Switch onValueChange={VIEW_MODEL.setRememberMe} value={VIEW_MODEL.rememberMe} />
               <Text color="textSecondary" size={14}>
-                Lembrar-me
+                Mantenha-me conectado
               </Text>
             </Container>
           </Container>
