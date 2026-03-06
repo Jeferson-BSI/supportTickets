@@ -23,6 +23,45 @@ Projeto desenvolvido como parte do processo seletivo da Feel Tech.
 
 ---
 
+## Demonstração
+
+<p align="center">
+  <img src="docs/screenshots/png1.jpeg" width="250"/>
+  <img src="docs/screenshots/png2.jpeg" width="250"/>
+  <img src="docs/screenshots/png7.jpeg" width="250"/>
+    <img src="docs/screenshots/png4.jpeg" width="250"/>
+
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/png5.jpeg" width="250"/>
+  <img src="docs/screenshots/png6.jpeg" width="250"/>
+</p>
+
+### Tela de Login
+
+![Login](docs/png1.jpeg)
+
+### Lista de Tickets
+
+![Tickets](docs/png2.jpeg)
+
+### Novo do Tickets
+
+![Novo do Tickets](docs/png4.jpeg)
+
+### Detalhes do Tickets
+
+![Detalhes do Tickets](docs/png4.jpeg)
+
+### Dashboard
+
+![Dashboard](docs/png5.jpeg)
+
+---
+
+![Carrossel dos 5 tickets com menor tempo de resolução](docs/png6.jpeg)
+
 ## Visão Geral
 
 **SupportTickets** é um aplicativo mobile multiplataforma (Android, iOS e Web) para gerenciamento de tickets de suporte. Desenvolvido com React Native e Expo, permite criar, listar, filtrar e acompanhar tickets com métricas e dashboards.
@@ -40,17 +79,17 @@ Projeto desenvolvido como parte do processo seletivo da Feel Tech.
 
 ## Tecnologias
 
-| Categoria | Tecnologia |
-|-----------|------------|
-| **Framework** | React Native 0.83.2 + Expo 55 |
-| **Linguagem** | TypeScript 5.9 |
-| **Navegação** | React Navigation 7 (native-stack, bottom-tabs) |
-| **Estado** | Zustand + TanStack React Query |
-| **Formulários** | React Hook Form + Yup + Zod |
-| **Persistência** | expo-sqlite + react-native-mmkv |
-| **UI/Icons** | lucide-react-native, react-native-reanimated |
-| **Gráficos** | react-native-chart-kit, react-native-gifted-charts |
-| **Fontes** | @expo-google-fonts/roboto |
+| Categoria        | Tecnologia                                         |
+| ---------------- | -------------------------------------------------- |
+| **Framework**    | React Native 0.83.2 + Expo 55                      |
+| **Linguagem**    | TypeScript 5.9                                     |
+| **Navegação**    | React Navigation 7 (native-stack, bottom-tabs)     |
+| **Estado**       | Zustand + TanStack React Query                     |
+| **Formulários**  | React Hook Form + Yup + Zod                        |
+| **Persistência** | expo-sqlite + react-native-mmkv                    |
+| **UI/Icons**     | lucide-react-native, react-native-reanimated       |
+| **Gráficos**     | react-native-chart-kit, react-native-gifted-charts |
+| **Fontes**       | @expo-google-fonts/roboto                          |
 
 ---
 
@@ -152,13 +191,13 @@ UI (View) → Hook (useTickets) → React Query → ticketService → TicketRepo
 
 ### Aliases de importação (tsconfig)
 
-| Alias | Caminho |
-|-------|---------|
-| `@app/*` | `src/app/*` |
-| `@core/*` | `src/core/*` |
-| `@features/*` | `src/features/*` |
-| `@tests/*` | `src/tests/*` |
-| `@theme/*` | `src/core/theme/*` |
+| Alias           | Caminho            |
+| --------------- | ------------------ |
+| `@app/*`        | `src/app/*`        |
+| `@core/*`       | `src/core/*`       |
+| `@features/*`   | `src/features/*`   |
+| `@tests/*`      | `src/tests/*`      |
+| `@theme/*`      | `src/core/theme/*` |
 | `@components/*` | `src/components/*` |
 | `@navigation/*` | `src/navigation/*` |
 
@@ -202,18 +241,19 @@ RootNavigator
 - Token em base64 armazenado localmente
 
 **Credenciais de Teste:**
+
 - **Email:** `admin@admin.com`
 - **Senha:** `123456`
 
 ### Tickets
 
-| Funcionalidade | Descrição |
-|----------------|-----------|
-| **Lista** | Exibe todos os tickets com filtros por status |
-| **Filtros** | Aberto, Em andamento, Fechado |
-| **Detalhe** | Visualização completa com opção de fechamento |
+| Funcionalidade  | Descrição                                              |
+| --------------- | ------------------------------------------------------ |
+| **Lista**       | Exibe todos os tickets com filtros por status          |
+| **Filtros**     | Aberto, Em andamento, Fechado                          |
+| **Detalhe**     | Visualização completa com opção de fechamento          |
 | **Novo ticket** | Formulário com título, descrição, prioridade, deadline |
-| **Fechamento** | Dropdown de status + descrição de fechamento |
+| **Fechamento**  | Dropdown de status + descrição de fechamento           |
 
 ### Dashboard
 
@@ -223,13 +263,13 @@ RootNavigator
 
 ### Componentes principais
 
-| Componente | Localização | Descrição |
-|------------|-------------|-----------|
-| TicketCard | `core/components/layout/TicketCard` | Card composto (Root, Header, Body, Footer, StatusBadge) |
-| Header | `core/components/layout/Header` | Cabeçalho (Root, Title, Left, Right, Action) |
-| Input | `core/components/layout/Input` | Campo de entrada composto |
-| FormContainer | `core/components/FormContainer` | Layout de formulário com scroll |
-| Button, Text, Spacer, Switch | `core/components/base` | Componentes base |
+| Componente                   | Localização                         | Descrição                                               |
+| ---------------------------- | ----------------------------------- | ------------------------------------------------------- |
+| TicketCard                   | `core/components/layout/TicketCard` | Card composto (Root, Header, Body, Footer, StatusBadge) |
+| Header                       | `core/components/layout/Header`     | Cabeçalho (Root, Title, Left, Right, Action)            |
+| Input                        | `core/components/layout/Input`      | Campo de entrada composto                               |
+| FormContainer                | `core/components/FormContainer`     | Layout de formulário com scroll                         |
+| Button, Text, Spacer, Switch | `core/components/base`              | Componentes base                                        |
 
 ---
 
@@ -296,12 +336,12 @@ CREATE TABLE tickets (
 - **StyleSheet** do React Native (sem Tailwind ou CSS Modules)
 - Tema centralizado em `src/core/theme/`:
 
-| Arquivo | Conteúdo |
-|---------|----------|
-| `colors.ts` | Paleta (primary, background, surface, status) |
-| `spacing.ts` | Espaçamentos padronizados |
-| `typography.ts` | Fontes e estilos de texto |
-| `theme.ts` | Hook `useTheme()` e export |
+| Arquivo         | Conteúdo                                      |
+| --------------- | --------------------------------------------- |
+| `colors.ts`     | Paleta (primary, background, surface, status) |
+| `spacing.ts`    | Espaçamentos padronizados                     |
+| `typography.ts` | Fontes e estilos de texto                     |
+| `theme.ts`      | Hook `useTheme()` e export                    |
 
 - **Fontes**: Roboto (Light, Regular, Medium, SemiBold, Bold)
 - **Ícones**: lucide-react-native
@@ -313,14 +353,14 @@ CREATE TABLE tickets (
 
 ### Variáveis de ambiente (.env)
 
-| Variável | Descrição | Exemplo |
-|----------|-----------|---------|
-| `APP_NAME` | Nome da aplicação | SupportTickets |
-| `APP_ENV` | Ambiente | development |
-| `API_URL` | URL da API (futuro) | http://localhost:3000/api |
-| `API_TIMEOUT` | Timeout em ms | 30000 |
-| `DB_NAME` | Nome do banco | support_tickets.db |
-| `ENABLE_LOGGING` | Logs habilitados | true |
+| Variável         | Descrição           | Exemplo                   |
+| ---------------- | ------------------- | ------------------------- |
+| `APP_NAME`       | Nome da aplicação   | SupportTickets            |
+| `APP_ENV`        | Ambiente            | development               |
+| `API_URL`        | URL da API (futuro) | http://localhost:3000/api |
+| `API_TIMEOUT`    | Timeout em ms       | 30000                     |
+| `DB_NAME`        | Nome do banco       | support_tickets.db        |
+| `ENABLE_LOGGING` | Logs habilitados    | true                      |
 
 ### app.json (Expo)
 
@@ -337,18 +377,18 @@ CREATE TABLE tickets (
 
 ## Scripts e Comandos
 
-| Script | Comando | Descrição |
-|--------|---------|-----------|
-| `start` | `expo start --dev-client` | Inicia o servidor de desenvolvimento |
-| `android` | `expo run:android` | Executa no Android |
-| `ios` | `expo run:ios` | Executa no iOS |
-| `web` | `expo start --web` | Executa na Web |
-| `test` | `jest` | Executa testes |
-| `test:watch` | `jest --watch` | Testes em modo watch |
-| `test:coverage` | `jest --coverage` | Cobertura de testes |
-| `lint` | `eslint . --ext .ts,.tsx` | Verifica lint |
-| `lint:fix` | `eslint . --ext .ts,.tsx --fix` | Corrige lint |
-| `format` | `prettier --write "src/**/*.{ts,tsx,json}"` | Formata código |
+| Script          | Comando                                     | Descrição                            |
+| --------------- | ------------------------------------------- | ------------------------------------ |
+| `start`         | `expo start --dev-client`                   | Inicia o servidor de desenvolvimento |
+| `android`       | `expo run:android`                          | Executa no Android                   |
+| `ios`           | `expo run:ios`                              | Executa no iOS                       |
+| `web`           | `expo start --web`                          | Executa na Web                       |
+| `test`          | `jest`                                      | Executa testes                       |
+| `test:watch`    | `jest --watch`                              | Testes em modo watch                 |
+| `test:coverage` | `jest --coverage`                           | Cobertura de testes                  |
+| `lint`          | `eslint . --ext .ts,.tsx`                   | Verifica lint                        |
+| `lint:fix`      | `eslint . --ext .ts,.tsx --fix`             | Corrige lint                         |
+| `format`        | `prettier --write "src/**/*.{ts,tsx,json}"` | Formata código                       |
 
 ---
 
@@ -393,14 +433,14 @@ eas build --profile production --platform all
 
 ## Resumo
 
-| Aspecto | Detalhe |
-|---------|---------|
-| **Tipo** | App mobile multiplataforma (React Native + Expo) |
-| **Dados** | Locais (SQLite), sem API REST |
-| **Auth** | Simulada com persistência MMKV |
-| **Plataformas** | Android, iOS, Web |
-| **Versão** | 1.0.0 |
+| Aspecto         | Detalhe                                          |
+| --------------- | ------------------------------------------------ |
+| **Tipo**        | App mobile multiplataforma (React Native + Expo) |
+| **Dados**       | Locais (SQLite), sem API REST                    |
+| **Auth**        | Simulada com persistência MMKV                   |
+| **Plataformas** | Android, iOS, Web                                |
+| **Versão**      | 1.0.0                                            |
 
 ---
 
-*Documentação gerada para o projeto SupportTickets.*
+_Documentação gerada para o projeto SupportTickets._
