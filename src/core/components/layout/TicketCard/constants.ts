@@ -8,8 +8,8 @@ interface StatusConfig {
 }
 
 export const STATUS_MAP: Record<TicketStatus, StatusConfig> = {
-  open: { themeKey: 'warning', label: 'Aberto' },
-  pending: { themeKey: 'info', label: 'Pendente' },
+  open: { themeKey: 'info', label: 'Aberto' },
+  pending: { themeKey: 'warning', label: 'Pendente' },
   closed: { themeKey: 'success', label: 'Fechado' },
   canceled: { themeKey: 'error', label: 'Cancelado' },
 };
