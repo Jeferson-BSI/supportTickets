@@ -67,7 +67,7 @@ const TicketDetailScreen = () => {
             onCloseTicket={vm.closeTicket}
           />
         ) : (
-          <TicketClosedBanner />
+          <TicketClosedBanner closureDescription={vm.ticket.closureDescription} />
         )}
 
         <Spacer height={40} />
