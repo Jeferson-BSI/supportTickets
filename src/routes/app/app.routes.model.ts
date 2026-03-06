@@ -6,4 +6,10 @@ export type AppTabParamList = {
   NewTickets: undefined;
 };
 
+export type AppStackParamList = {
+  Tabs: undefined;
+  TicketDetail: { ticketId: string };
+};
+
+export type AppStackNavigationProp = NativeStackNavigationProp<AppStackParamList>;
 export type TabScreenNavigationProp = NativeStackNavigationProp<AppTabParamList>;

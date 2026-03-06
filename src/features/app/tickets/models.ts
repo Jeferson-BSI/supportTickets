@@ -1,4 +1,6 @@
-export type TicketStatus = 'open' | 'pending' | 'closed' | 'canceled';
+export type TicketStatus = 'open' | 'pending' | 'closed' | 'canceled' | 'improcedente';
+
+export type TicketClosureStatus = 'closed' | 'improcedente' | 'canceled';
 
 export type TicketPriority = 'low' | 'medium' | 'high';
 
@@ -13,6 +15,7 @@ export interface Ticket {
   createdAt: string;
   deadline: number;
   closedAt?: string;
+  closureDescription?: string;
   category: string;
 }
 
@@ -37,9 +40,11 @@ export type TicketCountsByStatus = Record<TicketFilterOption, number>;
 
 export interface ITicketRepository {
   getAll(filters?: TicketFilters): Promise<Ticket[]>;
+  getById(id: string): Promise<Ticket | null>;
   getCountsByStatus(): Promise<TicketCountsByStatus>;
   getAverageResolutionMinutes(): Promise<number>;
   getTop5Fastest(): Promise<Ticket[]>;
   create(ticket: Ticket): Promise<void>;
   updateStatus(id: string, status: TicketStatus): Promise<void>;
+  closeTicket(id: string, status: TicketClosureStatus, closureDescription: string): Promise<void>;
 }

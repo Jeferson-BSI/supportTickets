@@ -1,6 +1,7 @@
 import type {
   Ticket,
   CreateTicketInput,
+  TicketClosureStatus,
   TicketFilters,
   TicketCountsByStatus,
   ITicketRepository,
@@ -48,6 +49,18 @@ export function createTicketService(repository: ITicketRepository) {
       await repository.create(ticket);
 
       return ticket;
+    },
+
+    async getTicketById(id: string): Promise<Ticket | null> {
+      return repository.getById(id);
+    },
+
+    async closeTicket(
+      id: string,
+      status: TicketClosureStatus,
+      closureDescription: string,
+    ): Promise<void> {
+      return repository.closeTicket(id, status, closureDescription);
     },
   };
 }

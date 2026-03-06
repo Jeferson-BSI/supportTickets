@@ -2,6 +2,7 @@ import { db } from '@core/database/client/db';
 import type {
   Ticket,
   TicketStatus,
+  TicketClosureStatus,
   TicketPriority,
   TicketFilters,
   TicketCountsByStatus,
@@ -17,6 +18,7 @@ interface TicketRow {
   created_at: number;
   deadline: number;
   closed_at: number | null;
+  closure_description: string | null;
 }
 
 function mapRowToTicket(row: TicketRow): Ticket {
@@ -29,6 +31,7 @@ function mapRowToTicket(row: TicketRow): Ticket {
     createdAt: new Date(row.created_at).toISOString(),
     deadline: row.deadline,
     closedAt: row.closed_at ? new Date(row.closed_at).toISOString() : undefined,
+    closureDescription: row.closure_description ?? undefined,
     category: 'Geral',
   };
 }
@@ -58,6 +61,7 @@ export async function getCountsByStatus(): Promise<TicketCountsByStatus> {
     pending: 0,
     closed: 0,
     canceled: 0,
+    improcedente: 0,
   };
 
   for (const row of rows) {
@@ -120,4 +124,20 @@ export async function getTop5FastestTickets(): Promise<Ticket[]> {
   );
 
   return rows.map(mapRowToTicket);
+}
+
+export async function getTicketById(id: string): Promise<Ticket | null> {
+  const row = await db.getFirstAsync<TicketRow>('SELECT * FROM tickets WHERE id = ?', [id]);
+  return row ? mapRowToTicket(row) : null;
+}
+
+export async function closeTicket(
+  id: string,
+  status: TicketClosureStatus,
+  closureDescription: string,
+): Promise<void> {
+  await db.runAsync(
+    `UPDATE tickets SET status = ?, closure_description = ?, closed_at = ? WHERE id = ?`,
+    [status, closureDescription, Date.now(), id],
+  );
 }

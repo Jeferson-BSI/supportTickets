@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthStack } from './auth/AuthStack';
 import { useAuthStore } from '@features/auth/store/authStore';
 import { colors } from '@theme/colors';
-import { TabNavigator } from './app/TabNavigator';
+import { AppStack } from './app/AppStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,7 +28,7 @@ export function RootNavigator() {
         }}
       >
         {isAuthenticated ? (
-          <Stack.Screen name="Main" component={TabNavigator} />
+          <Stack.Screen name="Main" component={AppStack} />
         ) : (
           <Stack.Screen name="Auth" component={AuthStack} />
         )}

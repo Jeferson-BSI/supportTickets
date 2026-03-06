@@ -12,6 +12,7 @@ export const STATUS_MAP: Record<TicketStatus, StatusConfig> = {
   pending: { themeKey: 'warning', label: 'Pendente' },
   closed: { themeKey: 'success', label: 'Fechado' },
   canceled: { themeKey: 'error', label: 'Cancelado' },
+  improcedente: { themeKey: 'warning', label: 'Improcedente' },
 };
 
 export const CARD_HEIGHT = 160;

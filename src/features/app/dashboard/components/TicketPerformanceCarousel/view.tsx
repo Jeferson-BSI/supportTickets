@@ -7,7 +7,7 @@ import type { Ticket } from '@features/app/tickets/models';
 import TicketPerformanceCard from './TicketPerformanceCard';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
-const CARD_WIDTH = SCREEN_WIDTH;
+const CARD_WIDTH = SCREEN_WIDTH - 32;
 const CARD_HEIGHT = 140;
 const AUTOPLAY_INTERVAL = 3000;
 
@@ -19,7 +19,9 @@ export default function TicketPerformanceCarousel({ tickets }: Props) {
   const carouselRef = useRef<ICarouselInstance>(null);
 
   const renderItem = useCallback(
-    ({ item }: { item: Ticket }) => <TicketPerformanceCard ticket={item} />,
+    ({ item }: { item: Ticket }) => (
+      <TicketPerformanceCard ticket={item} />
+    ),
     [],
   );
 
@@ -31,20 +33,18 @@ export default function TicketPerformanceCarousel({ tickets }: Props) {
         Top 5 Tickets Mais Rápidos
       </Text>
 
-      <Container flex={1} width="100%" style={styles.carouselWrapper}>
+      <Container width="100%" align="center" style={styles.carouselWrapper}>
         <Carousel
-        
           ref={carouselRef}
-          data={[...tickets, ...tickets]} // Duplicar os tickets para criar um loop infinito
+          data={tickets}
           renderItem={renderItem}
           width={CARD_WIDTH}
-          // width={}
-          // height={CARD_HEIGHT}
+          height={CARD_HEIGHT}
           loop
           autoPlay
           autoPlayInterval={AUTOPLAY_INTERVAL}
           scrollAnimationDuration={600}
-          // pagingEnabled
+          pagingEnabled
         />
       </Container>
     </Container>
